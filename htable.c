@@ -14,6 +14,12 @@ struct htablerec {
     hashing_t method;
 };
 
+/* 
+ * Double hashing algorithm for when double hashing is selected.
+ * @param h hash table for reference to capacity
+ * @param i_key index key
+ * @return index as a result of double hashing
+ */
 static unsigned int htable_step(htable h, unsigned int i_key) {
     return 1 + (i_key % (h->capacity - 1));
 }
