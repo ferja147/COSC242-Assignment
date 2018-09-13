@@ -8,6 +8,7 @@
 
 static tree_t tree_type;
 
+
 /* Generate tree struct */
 struct tree_node {
     char *key;
@@ -43,6 +44,7 @@ tree right_rotate(tree t)
     t->right = tmp;
     return t;
 }
+
 
 /*
  * Create a new tree.
@@ -118,6 +120,14 @@ tree tree_fix(tree b){
     return b;
     
 }
+/*
+ * Used to set root to black.
+ * @param t a given tree to set root black.
+ */
+tree setColourBlack (tree t) {
+    t->colour = BLACK;
+    return t;
+}
 
 /* 
  * Insert a value into a given tree.
@@ -131,13 +141,15 @@ tree tree_insert (tree t, char *str) {
         t->key = emalloc((strlen(str) +1) * sizeof(char));
         
         strcpy(t->key, str);
+        
         t->frequency++;
         t->left = NULL;
         t->right = NULL;
-        t->colour = RED;
+        
         if (tree_type == RBT) {
             t = tree_fix(t);
         }
+        
         return t;
         
     }
