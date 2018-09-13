@@ -4,7 +4,7 @@
 #include "htable.h"
 #include "mylib.h"
 
-/* Generate hash table struct */
+/** Generate hash table struct.*/
 struct htablerec {
     char **keys;
     int *frequencies;
@@ -14,7 +14,7 @@ struct htablerec {
     hashing_t method;
 };
 
-/* 
+/**
  * Double hashing algorithm for when double hashing is selected.
  * @param h hash table for reference to capacity
  * @param i_key index key
@@ -24,7 +24,7 @@ static unsigned int htable_step(htable h, unsigned int i_key) {
     return 1 + (i_key % (h->capacity - 1));
 }
 
-/* 
+/**
  * Convert an unsigned string character to an unsigned integer.
  * @param str a value to be converted
  * @return an unsigned integer as a result of conversion
@@ -38,7 +38,7 @@ static unsigned int str_to_int(char *str) {
 
     return out;
 }
-/* 
+/**
  * Generate a new hash table.
  * @param capacity the total capacity of the intended table
  * @param method the chosen hashing method the table uses
@@ -65,9 +65,9 @@ htable htable_new(int capacity, hashing_t method) {
 
     return h;
 }
-/* 
+/**
  * Free memory allocated to a given hash table.
- * @param h the hash table to be freed of allocated memory  
+ * @param h the hash table to be freed of allocated memory
  */
 void htable_free(htable h) {
     int i;
@@ -82,10 +82,10 @@ void htable_free(htable h) {
 
     free(h);
 }
-/* 
+/**
  * Insert a value into a given hash table.
  * @param h a given hash table
- * @param str a value to insert 
+ * @param str a value to insert
  * @return an integer to indicate insertion outcome
  */
 int htable_insert(htable h, char *str) {
@@ -140,7 +140,7 @@ int htable_insert(htable h, char *str) {
 
     return 0;
 }
-/*
+/**
  * Print values of a hash table.
  * @param h a given hash table
  * @param f a void function
@@ -155,7 +155,7 @@ void htable_print(htable h, void f(int freq, char *key)) {
         }
     }
 }
-/* 
+/**
  * Print the entire contents of the hash table using specific formatting.
  * @param h a given hash table
  * @param stream a file/s to print table contents to
@@ -171,11 +171,11 @@ void htable_print_entire_table(htable h, FILE *stream) {
             i, h->frequencies[i], h->stats[i], h->keys[i]);
     }
 }
-/* 
- * Search a hash table for a certain value. 
+/**
+ * Search a hash table for a certain value.
  * @param h a given hash table
  * @param str the value to search for in the table
- * @return an integer to indicate results of the search. Returns 1 for 
+ * @return an integer to indicate results of the search. Returns 1 for
  *  successful search, 0 otherwise
  */
 int htable_search(htable h, char *str) {
@@ -225,14 +225,14 @@ static void print_stats_line(htable h, FILE *stream, int percent_full) {
         for (i = 0; i < current_entries; i++) {
             if (h->stats[i] == 0) {
                 at_home++;
-            } 
+            }
             if (h->stats[i] > max_collisions) {
                 max_collisions = h->stats[i];
             }
             average_collisions += h->stats[i];
         }
-    
-        fprintf(stream, "%4d %10d %10.1f %10.2f %11d\n", percent_full, 
+
+        fprintf(stream, "%4d %10d %10.1f %10.2f %11d\n", percent_full,
                 current_entries, at_home * 100.0 / current_entries,
                 average_collisions / current_entries, max_collisions);
     }
@@ -257,8 +257,8 @@ static void print_stats_line(htable h, FILE *stream, int percent_full) {
 void htable_print_stats(htable h, FILE *stream, int num_stats) {
     int i;
 
-    fprintf(stream, "\n%s\n\n", 
-            h->method == LINEAR_P ? "Linear Probing" : "Double Hashing"); 
+    fprintf(stream, "\n%s\n\n",
+            h->method == LINEAR_P ? "Linear Probing" : "Double Hashing");
     fprintf(stream, "Percent   Current   Percent    Average      Maximum\n");
     fprintf(stream, " Full     Entries   At Home   Collisions   Collisions\n");
     fprintf(stream, "-----------------------------------------------------\n");

@@ -10,7 +10,7 @@
 
 typedef enum datastructure {TREE, HTABLE} datastructure_t;
 
-/*
+/**
  * Checks if a number given by the user is a prime number.
  * @param n a number to check
  * @return an integer indicating whether or not the number is a prime number
@@ -31,7 +31,7 @@ int is_prime(int n) {
     return 1;
 }
 
-/*
+/**
  * Returns the next highest prime greater than a given value.
  * @param i the base number
  * @return the next highest prime
@@ -46,7 +46,7 @@ int next_highest_prime(int i) {
     }
 }
 
-/* 
+/**
  * Print words added to the data structure alongside their frequencies.
  * @param frequency the frequency of a user-given word
  * @param word a word to print information about
@@ -55,7 +55,7 @@ static void print_info(int freq, char *word) {
     printf("%-4d %s\n", freq, word);
 }
 
-/*
+/**
  * Generate a text block for message help within the terminal.
  */
 static void print_help() {
@@ -71,7 +71,7 @@ static void print_help() {
     printf("%13cfrom stdin as dictionary.  Print unknown words to\n", ' ');
     printf("%13cstdout, timing info etc to stderr (ignore -o & -p)\n", ' ');
 
-    
+
     printf("-d%11cUse double hashing (linear probing is the default)\n", ' ');
     printf("-e%11cDisplay entire contents of hash table on stderr\n", ' ');
     printf("-o%11cOutput the tree in DOT form to file 'tree-view.dot'\n", ' ');
@@ -79,11 +79,11 @@ static void print_help() {
     printf("-r%11cMake the tree an RBT (the default is a BST)\n", ' ');
     printf("-s SNAPSHOTS Show SNAPSHOTS stats snapshots (if -p is used)\n");
     printf("-t TABLESIZE Use the first prime >= TABLESIZE as htable size\n\n");
-    
+
     printf("-h%11cDisplay this message\n\n", ' ');
 }
 
-/* 
+/**
  * Check the spelling of a word.
  * @param h a given hash table
  * @param t a given tree type
@@ -97,7 +97,7 @@ static void spellcheck(htable h, tree t,
                        double fill_start, double fill_end) {
     int unknown_words = 0;
     clock_t search_start, search_end;
-    
+
     if (h != NULL) {
         search_start = clock();
         while (getword(word, sizeof word, file_to_check) != EOF) {
@@ -149,7 +149,7 @@ int main(int argc, char **argv) {
                     fprintf(stderr, "Failed to open file: %s\n", optarg);
                     return EXIT_FAILURE;
                 }
-                
+
                 break;
             case 'd':
                 if (datastructure == HTABLE) {
@@ -207,7 +207,7 @@ int main(int argc, char **argv) {
     if (help == 0) { /* If no errors in options and -h is NOT selected */
         char word[WORD_MAX];
         clock_t fill_start, fill_end;
-        
+
         if (datastructure == HTABLE) { /* HASH TABLE */
             htable h = htable_new(htable_capacity, hashing_method);
 
@@ -217,11 +217,7 @@ int main(int argc, char **argv) {
             }
             fill_end = clock();
 
-            /*
-               Seems silly to have this separate to the
-               if - else if - else block, but this makes
-               it consistent with the sample asgn.
-            */
+
             if (print_entire_table == 1) {
                 htable_print_entire_table(h, stdout);
             }
