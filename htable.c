@@ -264,5 +264,6 @@ void htable_print_stats(htable h, FILE *stream, int num_stats) {
     for (i = 1; i <= num_stats; i++) {
         print_stats_line(h, stream, 100 * i / num_stats);
     }
-    fprintf(stream, "-----------------------------------------------------\n\n");
+    fprintf(stream, "---------------------");
+    fprintf(stream, "--------------------------------\n\n");
 }
