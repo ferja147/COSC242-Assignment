@@ -68,6 +68,10 @@ static void print_help() {
 
     printf("-T%11cUse a tree data structure (default is hash table)\n",' ');
     printf("-c FILENAME  Check spelling of words in FILENAME using words\n");
+    printf("%13cfrom stdin as dictionary.  Print unknown words to\n", ' ');
+    printf("%13cstdout, timing info etc to stderr (ignore -o & -p)\n", ' ');
+
+    
     printf("-d%11cUse double hashing (linear probing is the default)\n", ' ');
     printf("-e%11cDisplay entire contents of hash table on stderr\n", ' ');
     printf("-o%11cOutput the tree in DOT form to file 'tree-view.dot'\n", ' ');
