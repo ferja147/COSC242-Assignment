@@ -134,7 +134,7 @@ tree setColourBlack (tree t) {
  * @param t a given tree to insert a value into
  * @param str the value to be inserted into the tree
  */
-tree tree_insert (tree t, char *str) {
+static tree tree_insert_wrapper(tree t, char *str) {
     if (t == NULL){
         
         tree t = emalloc(sizeof *t);
@@ -159,16 +159,27 @@ tree tree_insert (tree t, char *str) {
         return t;
     }
     else if (strcmp(str, t->key) > 0){
-        t->right = tree_insert(t->right, str);
+        t->right = tree_insert_wrapper(t->right, str);
     }
     else{
-        t->left = tree_insert(t->left, str);
+        t->left = tree_insert_wrapper(t->left, str);
     }
     
     if(tree_type == RBT)
         {
             t = tree_fix(t);
         }
+    return t;
+}
+
+/* 
+ * Wrapper function for recursive call of tree_insert_wrapper().
+ * @param t a given tree to insert a value into
+ * @param str the value to be inserted into the tree
+ */
+tree tree_insert (tree t, char *str) {
+    t = tree_insert_wrapper(t, str);
+    setColourBlack(t);
     return t;
 }
 
