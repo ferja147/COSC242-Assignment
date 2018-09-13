@@ -198,7 +198,8 @@ void tree_inorder(tree t, void f(char *str)) {
 /* 
  * Traverse a tree in pre-order fashion.
  * @param b a given tree to traverse
- * @param f a function given a word frequency value aswell as a key value to traverse
+ * @param f a function given a word frequency
+ * value aswell as a key value to traverse
  */
 void tree_preorder(tree t, void f(int frequency, char *str)) {
     if (t == NULL) {
