@@ -78,6 +78,7 @@ void htable_free(htable h) {
 
     free(h->keys);
     free(h->frequencies);
+    free(h->stats);
 
     free(h);
 }
