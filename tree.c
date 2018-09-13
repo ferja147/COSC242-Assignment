@@ -9,7 +9,7 @@
 static tree_t tree_type;
 
 
-/* Generate tree struct */
+/* Generate tree struct. */
 struct tree_node {
     char *key;
     tree_colour colour;
@@ -18,8 +18,8 @@ struct tree_node {
     int frequency;
 };
 
-/* 
- * Rotate the nodes of a RBT tree to the left.
+/**
+ * Rotate the nodes of an RBT tree to the left.
  * @param t a given tree to rotate
  * @return the updated tree
  */
@@ -31,8 +31,8 @@ tree left_rotate(tree t)
     t->left = tmp;
     return t;
 }
-/* 
- * Rotate the nodes of a RBT tree to the right.
+/**
+ * Rotate the nodes of an RBT tree to the right.
  * @param t a given tree to rotate
  * @return the updated tree
  */
@@ -46,7 +46,7 @@ tree right_rotate(tree t)
 }
 
 
-/*
+/**
  * Create a new tree.
  * @param type used to define what tree the program creates
  * @return the newly created tree with a user-defined type
@@ -58,8 +58,8 @@ tree tree_new(tree_t type)
     return NULL;    
 }
 
-/*
- * Flip the colours of the tree so that children are 
+/**
+ * Flip the colours of the tree so that children are
  * BLACK with RED roots.
  * @param t a given tree to flip colours
  * @return return a post-flip tree
@@ -71,7 +71,7 @@ static tree flipColour(tree t){
     return t;
 }
 
-/* 
+/**
  * Fix trees when their structure is altered.
  * @param t a given tree requiring restructuring
  * @return the post-fix tree
@@ -120,7 +120,7 @@ tree tree_fix(tree b){
     return b;
     
 }
-/*
+/**
  * Used to set root to black.
  * @param t a given tree to set root black.
  */
@@ -129,7 +129,7 @@ tree setColourBlack (tree t) {
     return t;
 }
 
-/* 
+/**
  * Insert a value into a given tree.
  * @param t a given tree to insert a value into
  * @param str the value to be inserted into the tree
@@ -172,7 +172,7 @@ static tree tree_insert_wrapper(tree t, char *str) {
     return t;
 }
 
-/* 
+/**
  * Wrapper function for recursive call of tree_insert_wrapper().
  * @param t a given tree to insert a value into
  * @param str the value to be inserted into the tree
@@ -183,13 +183,12 @@ tree tree_insert (tree t, char *str) {
     return t;
 }
 
-/*
+/**
  * Search a given tree for a value given by the user. Return 1 if the value
- * is found, 0 otherwise
+ * is found, 0 otherwise.
  * @param b a given tree to search for values
  * @param str the value to search the tree for
  * @return an integer to indicate search results. 1 for success, 0 for failure.
- *  Return a recursive function call if keys don't match
  */
 int tree_search(tree t, char *str) {
     if (t == NULL) {
@@ -204,8 +203,8 @@ int tree_search(tree t, char *str) {
     }
 }
 
-/* 
- * Traverse a tree in in-order fashion.
+/**
+ * Traverses a tree in in-order fashion.
  * @param b a given tree to traverse
  * @param f a function given a value to traverse
  */
@@ -218,11 +217,11 @@ void tree_inorder(tree t, void f(char *str)) {
     tree_inorder(t->right, f);
 }
 
-/* 
+/**
  * Traverse a tree in pre-order fashion.
  * @param b a given tree to traverse
  * @param f a function given a word frequency
- * value aswell as a key value to traverse
+ * value as well as a key value to traverse
  */
 void tree_preorder(tree t, void f(int frequency, char *str)) {
     if (t == NULL) {
@@ -234,7 +233,7 @@ void tree_preorder(tree t, void f(int frequency, char *str)) {
 }
 
 
-/* 
+/**
  * Free the memory allocated to a given tree.
  * @param b a given tree to free memory from
  * @return a tree freed from memory
