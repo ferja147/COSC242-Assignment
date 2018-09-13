@@ -59,7 +59,24 @@ static void print_info(int freq, char *word) {
  * Generate a text block for message help within the terminal.
  */
 static void print_help() {
-    printf("HELP MESSAGE XD\n");
+    printf("Usage: ./asgn [OPTIONS]... <STDIN>\n\n");
+
+    printf("Perform tasks using a hash table or binary tree. By default, ");
+    printf("words\n");
+    printf("read from stdin are added to the data structure before printing\n");
+    printf("them, along with their frequencies, to stdout.\n\n");
+
+    printf("-T%11cUse a tree data structure (default is hash table)\n",' ');
+    printf("-c FILENAME  Check spelling of words in FILENAME using words\n");
+    printf("-d%11cUse double hashing (linear probing is the default)\n", ' ');
+    printf("-e%11cDisplay entire contents of hash table on stderr\n", ' ');
+    printf("-o%11cOutput the tree in DOT form to file 'tree-view.dot'\n", ' ');
+    printf("-p%11cPrint hash table stats instead of frequencies & words\n",' ');
+    printf("-r%11cMake the tree an RBT (the default is a BST)\n", ' ');
+    printf("-s SNAPSHOTS Show SNAPSHOTS stats snapshots (if -p is used)\n");
+    printf("-t TABLESIZE Use the first prime >= TABLESIZE as htable size\n\n");
+    
+    printf("-h%11cDisplay this message\n\n", ' ');
 }
 
 /* 
@@ -112,8 +129,10 @@ int main(int argc, char **argv) {
     FILE *tree_view = NULL;
     hashing_t hashing_method = LINEAR_P;
     tree_t tree_type = BST;
-    int htable_capacity = 113, snapshots = 10, help = 0, print_stats = 0, print_entire_table = 0;
-    /* Statements here represent command-line arguments with corresponding actions */
+    int htable_capacity = 113, snapshots = 10, help = 0,
+        print_stats = 0, print_entire_table = 0;
+    /* Statements here represent command-line arguments
+       with corresponding actions */
     while ((option = getopt(argc, argv, optstring)) != EOF) {
         switch (option) {
             case 'T':
