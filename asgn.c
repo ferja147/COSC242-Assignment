@@ -242,6 +242,7 @@ int main(int argc, char **argv) {
             fill_start = clock();
             while (getword(word, sizeof word, stdin) != EOF) {
                 t = tree_insert(t, word);
+                t = setColourBlack(t);
             }
             fill_end = clock();
 
