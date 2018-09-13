@@ -56,6 +56,12 @@ htable htable_new(int capacity, hashing_t method) {
     h->keys = emalloc(h->capacity * sizeof h->keys[0]);
     h->stats = emalloc(h->capacity * sizeof h->stats[0]);
 
+    for (i = 0; i < h->capacity; i++) {
+        h->frequencies[i] = 0;
+        h->keys[i] = NULL;
+        h->stats[i] = 0;
+    }
+
     h->method = method;
 
     for (i = 0; i < h->capacity; i++) {

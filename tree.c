@@ -142,9 +142,10 @@ static tree tree_insert_wrapper(tree t, char *str) {
         
         strcpy(t->key, str);
         
-        t->frequency++;
+        t->frequency = 1;
         t->left = NULL;
         t->right = NULL;
+        t->colour = RED;
         
         if (tree_type == RBT) {
             t = tree_fix(t);
